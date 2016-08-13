@@ -18,6 +18,7 @@ keywords = ["lunch", "food"]
 
 AUTH_KEY = os.environ['AUTH_KEY']
 ROOM_ID = os.environ['ROOM_ID']
+sparkroom_endpoint = "https://api.ciscospark.com/v1/messages"
 
 @app.route('/')
 def confirm_service():
@@ -32,7 +33,7 @@ def post_result():
     data = {"roomId" : ROOM_ID}
 
     data['text'] = request.args.get('message')
-    r = requests.post("https://api.ciscospark.com/v1/messages", headers=headers, json=data)
+    r = requests.post(sparkroom_endpoint, headers=headers, json=data)
     return "Ok"
 
 if __name__ == "__main__":
