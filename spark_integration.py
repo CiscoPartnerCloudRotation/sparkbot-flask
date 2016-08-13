@@ -11,8 +11,6 @@ import os
 # Run a flask endpoint
 app = Flask(__name__)
 
-watcherstatus = "unknown"
-
 # This will hold a list of all messages that contain a keyword, that we've already seen
 # so that we don't parse the same message twice
 parsed_kw_messages = []
@@ -24,16 +22,6 @@ ROOM_ID = os.environ['ROOM_ID']
 @app.route('/')
 def confirm_service():
     return "Service OK"
-
-@app.route('/setwatcherstatus', methods=["POST"])
-def setwatcherstatus():
-    global watcherstatus 
-    watcherstatus = {"id": request.args.get('id'), "message": request.args.get('message')}
-    return "Set OK"
-
-@app.route('/getwatcherstatus', methods=["GET"])
-def getwatcherstatus():
-    return str(watcherstatus)
 
 @app.route('/post_result', methods=["POST"])
 def post_result():
